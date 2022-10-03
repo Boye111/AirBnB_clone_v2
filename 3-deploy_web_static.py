@@ -7,7 +7,7 @@ from os import path
 env.hosts = ['44.210.76.231', '35.168.112.216']
 
 
-@iterates_once
+@runs_once
 def do_pack():
     """ a Fabric script that generates a .tgz archive from web_static """
     day = datetime.now()
