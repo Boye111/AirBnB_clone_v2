@@ -9,7 +9,7 @@ env.hosts = ['44.210.76.231', '35.168.112.216']
 def do_pack():
     """ a Fabric script that generates a .tgz archive from web_static """
     day = datetime.now()
-    now = d.strftime('%Y%m%d%H%M%S')
+    now = day.strftime('%Y%m%d%H%M%S')
     path = "versions/web_static_{}.tgz".format(now)
 
     local("mkdir -p versions")
