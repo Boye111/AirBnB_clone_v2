@@ -3,7 +3,9 @@ from datetime import datetime
 from fabric.api import *
 from os import path
 
+
 env.hosts = ['44.210.76.231', '35.168.112.216']
+
 
 def do_pack():
     """ a Fabric script that generates a .tgz archive from web_static """
@@ -12,6 +14,7 @@ def do_pack():
 
     local("mkdir -p versions")
     local("tar -czvf versions/web_static_{}.tgz web_static".format(now))
+
 
 def do_deploy(archive_path):
     """ distributes an archive to your web servers, using the function """

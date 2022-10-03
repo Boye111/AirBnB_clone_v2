@@ -2,6 +2,7 @@
 from datetime import datetime
 from fabric.api import local
 
+
 def do_pack():
     """ a Fabric script that generates a .tgz archive from web_static """
     day = datetime.now()

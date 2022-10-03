@@ -5,6 +5,7 @@ from os import path
 
 env.hosts = ['44.210.76.231', '35.168.112.216']
 
+
 @iterates_once
 def do_pack():
     """ a Fabric script that generates a .tgz archive from web_static """
@@ -15,6 +16,7 @@ def do_pack():
     local("mkdir -p versions")
     local("tar -czvf versions/web_static_{}.tgz web_static".format(now))
     return path
+
 
 def do_deploy(archive_path):
     """ distributes an archive to your web servers, using the function """
@@ -34,8 +36,8 @@ def do_deploy(archive_path):
         run("ln -s {} /data/web_static/current".format(f_path))
 
         return True
-
     return False
+
 
 def deploy():
     """  creates and distributes an archive to your web servers """
