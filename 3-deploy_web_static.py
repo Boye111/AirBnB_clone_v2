@@ -3,6 +3,7 @@ from datetime import datetime
 from fabric.api import *
 from os import path
 
+
 env.hosts = ['44.210.76.231', '35.168.112.216']
 
 
