@@ -10,6 +10,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 import sqlalchemy
+from sqlalchemy import MetaData
 from sqlalchemy import create_engine
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import scoped_session
@@ -68,7 +69,8 @@ class DBStorage:
     def reload(self):
         """creates all tables in database and creates new session"""
         Base.metadata.create_all(self.__engine)
-        sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        sess_factory = sessionmaker(bind=self.__engine,
+                                    expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session()
 

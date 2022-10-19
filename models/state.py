@@ -13,20 +13,21 @@ from sqlalchemy.ext.declarative import declarative_base
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
+    name = Column(String(128), nullable=False)
+    cities = relationship('City', backref='state', cascade='delete')
 
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
-        name = Column(String(128), nullable=False)
-        cities = relationship('City', backref='state',
-                              cascade='all, delete-orphan')
-    else:
-        name = ""
+    def __init__(self, *args, **kwargs):
+        """Initialises state"""
+        super().__init__(*args, **kwargs)
 
+    if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def cities(self):
-            cities = list()
+            city_instance_list = []
+            all_cities = models.storage.all(City)
 
-            for _id, city in models.storage.all(City).items():
+            for city in all_cities.values():
                 if city.state_id == self.id:
-                    cities.append(city)
+                    city_instance_list.append(city)
 
-            return cities
+            return city_instance_list
